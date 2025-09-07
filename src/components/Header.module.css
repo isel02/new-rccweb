@@ -1,0 +1,233 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: transparent;
+  color: white;
+  z-index: 100;
+  position: relative;
+  width: 100%;
+}
+
+.logo {
+  height: 70px;
+  width: auto;
+  opacity: 80%;
+  flex-shrink: 0; /* Prevent logo from shrinking */
+}
+
+.nav {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+}
+
+.nav a {
+  position: relative;
+  text-decoration: none;
+  color: white;
+  font-weight: 400;
+  font-size: 1.3rem;
+  transition: color 0.3s ease;
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+/* Underline effect */
+.nav a::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: white;
+  transition: width 0.3s ease;
+}
+
+.nav a:hover::after {
+  width: 100%;
+}
+
+.contactButton {
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.contactButton:hover {
+  background: white;
+  color: #090979;
+}
+
+/* Mobile menu styles */
+.mobileMenuToggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.mobileNav {
+  display: none;
+}
+
+/* Tablet styles (768px to 1024px) */
+@media (max-width: 1024px) {
+  .header {
+    padding: 1rem 1.5rem;
+  }
+  
+  .nav {
+    gap: 2rem;
+  }
+  
+  .nav a {
+    font-size: 1.1rem;
+  }
+  
+  .logo {
+    height: 60px;
+  }
+}
+
+/* Small tablet / large mobile (481px to 768px) */
+@media (max-width: 768px) {
+  .header {
+    padding: 1rem;
+  }
+  
+  .nav {
+    gap: 1.5rem;
+  }
+  
+  .nav a {
+    font-size: 1rem;
+  }
+  
+  .logo {
+    height: 50px;
+  }
+  
+  .contactButton {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+/* Mobile styles (up to 480px) */
+@media (max-width: 480px) {
+  .header {
+    padding: 0.8rem;
+    flex-wrap: wrap;
+  }
+  
+  .logo {
+    height: 45px;
+  }
+  
+  /* Hide desktop navigation */
+  .nav {
+    display: none;
+  }
+  
+  .contactButton {
+    display: none;
+  }
+  
+  /* Show mobile menu toggle */
+  .mobileMenuToggle {
+    display: block;
+  }
+  
+  /* Mobile navigation */
+  .mobileNav {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(9, 9, 121, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 1rem;
+    gap: 1rem;
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .mobileNav.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .mobileNav a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    transition: color 0.3s ease;
+  }
+  
+  .mobileNav a:hover {
+    color: #ccc;
+  }
+  
+  .mobileNav a:last-child {
+    border-bottom: none;
+  }
+  
+  .mobileContactButton {
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1));
+    border: 2px solid white;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .mobileContactButton:hover {
+    background: white;
+    color: #090979;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+  }
+}
+
+/* Very small screens (up to 320px) */
+@media (max-width: 320px) {
+  .header {
+    padding: 0.5rem;
+  }
+  
+  .logo {
+    height: 40px;
+  }
+  
+  .mobileMenuToggle {
+    font-size: 1.2rem;
+    padding: 0.3rem;
+  }
+}

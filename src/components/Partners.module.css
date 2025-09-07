@@ -1,0 +1,310 @@
+/* Partners.module.css */
+.partnersSection {
+  position: relative;
+  height: 100vh;
+  padding: 6rem 2rem;
+  background: linear-gradient(135deg, #0a0a2e 0%, #16213e 50%, #0f3460 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.circuitBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.1;
+  z-index: 1;
+}
+
+.circuitLine {
+  position: absolute;
+  background: linear-gradient(90deg, transparent, #4c9aff, transparent);
+  animation: circuitFlow 8s infinite ease-in-out;
+}
+
+.circuitLine1 {
+  width: 300px;
+  height: 2px;
+  top: 20%;
+  left: -300px;
+  animation-delay: 0s;
+}
+
+.circuitLine2 {
+  width: 400px;
+  height: 2px;
+  top: 60%;
+  right: -400px;
+  animation-delay: 2s;
+}
+
+.circuitLine3 {
+  width: 250px;
+  height: 2px;
+  top: 80%;
+  left: -250px;
+  animation-delay: 4s;
+}
+
+.circuitDot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #4c9aff;
+  border-radius: 50%;
+  animation: pulse 3s infinite ease-in-out;
+}
+
+.circuitDot1 {
+  top: 25%;
+  left: 15%;
+  animation-delay: 0s;
+}
+
+.circuitDot2 {
+  top: 70%;
+  right: 20%;
+  animation-delay: 1s;
+}
+
+.circuitDot3 {
+  bottom: 30%;
+  left: 60%;
+  animation-delay: 2s;
+}
+
+.contentWrapper {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.headerSection {
+  text-align: center;
+  margin-bottom: 4rem;
+  animation: fadeInUp 1s ease-out;
+}
+
+.titleSmall {
+  font-size: 1rem;
+  color: #4c9aff;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.titleSmall::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #4c9aff, transparent);
+}
+
+.titleBig {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #ffffff 0%, #e6f3ff 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #a8b8d8;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.logosContainer {
+  position: relative;
+  animation: fadeInUp 1s ease-out 0.3s both;
+}
+
+.logosGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 2rem;
+  align-items: center;
+  justify-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logoWrapper {
+  opacity: 0;
+  animation: fadeInScale 0.8s ease-out forwards;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.logoWrapper:hover {
+  transform: translateY(-5px);
+}
+
+.logoInner {
+  position: relative;
+  width: 140px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(76, 154, 255, 0.1);
+  border-radius: 12px;
+  padding: 1rem;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+}
+
+.logoInner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(76, 154, 255, 0.1), transparent);
+  transition: left 0.6s ease;
+}
+
+.logoWrapper:hover .logoInner::before {
+  left: 100%;
+}
+
+.logoWrapper:hover .logoInner {
+  border-color: rgba(76, 154, 255, 0.3);
+  background: rgba(76, 154, 255, 0.05);
+  box-shadow: 0 8px 32px rgba(76, 154, 255, 0.1);
+}
+
+.logoImg {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: grayscale(100%) brightness(0.7) contrast(1.2);
+  transition: all 0.4s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.logoWrapper:hover .logoImg {
+  filter: none;
+  transform: scale(1.05);
+}
+
+.logoGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle, rgba(76, 154, 255, 0.2) 0%, transparent 70%);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.logoWrapper:hover .logoGlow {
+  opacity: 1;
+}
+
+/* Animations */
+@keyframes circuitFlow {
+  0% { transform: translateX(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateX(100vw); opacity: 0; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.5); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .logosGrid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .logoInner {
+    width: 120px;
+    height: 70px;
+  }
+}
+
+@media (max-width: 768px) {
+  .partnersSection {
+    padding: 4rem 1rem;
+  }
+  
+  .titleBig {
+    font-size: 2.5rem;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+  }
+  
+  .logosGrid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 1rem;
+  }
+  
+  .logoInner {
+    width: 100px;
+    height: 60px;
+    padding: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .titleBig {
+    font-size: 2rem;
+  }
+  
+  .logosGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
