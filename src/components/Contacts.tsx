@@ -31,23 +31,23 @@ const ContactSection = () => {
 
     // Send email to the admin
     emailjs.send(
-      'service_6bl34lb',           // Your EmailJS service ID
-      'template_w5hkxir',           // Your email template for the user
+      'service_6lqsl3n',           // Your EmailJS service ID
+      'template_hz5n2il',           // Your email template for the user
       {
         ...formData,               // Send all form data to the template
-        to_email: 'belmontekricel5@gmail.com',  // Admin email
+        to_email: 'rcccabling.netsolutions@yahoo.com.ph',  // Admin email
       },
-      '7TPntqYgyfkhdqPI3'          // Your EmailJS user ID (public key)
+      'FOte9ExClWFtykYI9'          // Your EmailJS user ID (public key)
     )
     .then(() => {
       // Send email to the user
       return emailjs.send(
-        'service_6bl34lb',           // Your EmailJS service ID
-        'template_be786rh', // Your email template for the user
+        'service_6lqsl3n',           // Your EmailJS service ID
+        'template_tkw19ms', // Your email template for the user
         {
           ...formData,               // Send all form data to the template
         },
-        '7TPntqYgyfkhdqPI3'          // Your EmailJS user ID (public key)
+        'FOte9ExClWFtykYI9'          // Your EmailJS user ID (public key)
       );
     })
     .then(() => {

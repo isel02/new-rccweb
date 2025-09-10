@@ -74,14 +74,14 @@ const Slider: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className={styles.slide}>
+        {/* <div className={styles.slide}>
           <div className={styles.slide__inner}>
             <div className={styles.slide__content}>
               <h2 className={styles.slide__heading}>Wind Farm</h2>
               <p className={styles.slide__text}>Projects. Precision. Performance.</p>
             </div>
           </div>
-        </div>
+        </div> */}
         {/* <div className={styles.slide}>
           <div className={styles.slide__inner}>
             <div className={styles.slide__content}>

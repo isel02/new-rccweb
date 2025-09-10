@@ -94,6 +94,7 @@
   flex-direction: column;
   gap: 2rem;
   transition: all 0.4s ease;
+  max-width: 600px;
 }
 
 .infoHeader {
@@ -191,6 +192,7 @@
   flex-direction: column;
   transition: all 0.4s ease;
   height: 100%;
+  max-width: 600px;
 }
 
 .formHeader {
