@@ -153,21 +153,11 @@
 
 /* Background images */
 .slide-1 .slide__inner {
-  background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/onepgscr-2.jpg');
+  background-image: url('/public/assets/projects/Main.jpg');
 }
 .slide-2 .slide__inner {
-  background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/onepgscr-3.jpg');
+  background-image: url('/public/assets/projects/Wind_Farm.jpg');
 }
-.slide-3 .slide__inner {
-  background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/onepgscr-4.jpg');
-}
-.slide-4 .slide__inner {
-  background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/onepgscr-5.jpg');
-}
-.slide-5 .slide__inner {
-  background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/onepgscr-6.jpg');
-}
-
 .slide__content {
   position: absolute;
   left: 5%;

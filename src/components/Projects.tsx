@@ -76,22 +76,20 @@ const Slider: React.FC = () => {
         </div>
         <div className={styles.slide}>
           <div className={styles.slide__inner}>
-            <img src="/public/assets/projects/Wind_Farm.jpg" alt="RCC Project" className={styles.slide__image} />
             <div className={styles.slide__content}>
               <h2 className={styles.slide__heading}>Wind Farm</h2>
               <p className={styles.slide__text}>Projects. Precision. Performance.</p>
             </div>
           </div>
         </div>
-        <div className={styles.slide}>
+        {/* <div className={styles.slide}>
           <div className={styles.slide__inner}>
-            <img src="/public/assets/projects/Tanawon_Palayan.jpg" alt="RCC Project" className={styles.slide__image} />
             <div className={styles.slide__content}>
               <h2 className={styles.slide__heading}>Tanawon</h2>
               <p className={styles.slide__text}>Projects. Precision. Performance.</p>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
 
       <div className={styles.slider__control}>
