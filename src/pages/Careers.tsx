@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useRef, useState, } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import styles from './Careers.module.css';
 
 interface JobPosition {
@@ -31,6 +31,8 @@ const Careers: React.FC = () => {
   const positionsRef = useRef<HTMLElement>(null);
   const benefitsRef = useRef<HTMLElement>(null);
   const cultureRef = useRef<HTMLElement>(null);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const [selectedJob, setSelectedJob] = useState<JobPosition | null>(null);
   const [showModal, setShowModal] = useState(false);
@@ -48,153 +50,34 @@ const Careers: React.FC = () => {
     resume: null
   });
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+  // Function to scroll to positions section
+  const scrollToPositions = () => {
+    if (positionsRef.current) {
+      positionsRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, 
+    section: string
+  ) => {
     e.preventDefault();
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+    
+    // Always navigate to home with hash
+    navigate(`/#${section}`);
+    
+    // If already on home page, scroll immediately
+    if (location.pathname === '/') {
+      setTimeout(() => {
+        const element = document.getElementById(section);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
     }
   };
 
   const jobPositions: JobPosition[] = [
-    {
-      id: 1,
-      title: "Network Systems Engineer",
-      department: "Engineering",
-      location: "Manila, Philippines",
-      type: "Full-time",
-      experience: "3-5 years",
-      description: "Design, implement, and maintain complex network infrastructure solutions for enterprise clients. Work with cutting-edge technologies in structured cabling, fiber optics, and network security systems.",
-      requirements: [
-        "Bachelor's degree in Engineering, Computer Science, or related field",
-        "3+ years experience in network infrastructure design",
-        "Cisco, Juniper, or equivalent certifications preferred",
-        "Experience with fiber optic installations and testing",
-        "Strong problem-solving and analytical skills",
-        "Excellent communication and client-facing abilities"
-      ],
-      benefits: [
-        "Competitive salary with performance bonuses",
-        "Health insurance coverage",
-        "Professional development opportunities",
-        "Certification reimbursement program"
-      ]
-    },
-    {
-      id: 2,
-      title: "CCTV Installation Specialist",
-      department: "Security Systems",
-      location: "Manila, Philippines",
-      type: "Full-time",
-      experience: "2-4 years",
-      description: "Lead installation and configuration of advanced CCTV and security systems for commercial and industrial clients. Ensure optimal system performance and client satisfaction.",
-      requirements: [
-        "Technical diploma or equivalent experience",
-        "2+ years experience in CCTV system installation",
-        "Knowledge of IP cameras, NVR/DVR systems",
-        "Experience with Hikvision, Bosch, or similar brands",
-        "Physical ability to work in various environments",
-        "Valid driver's license"
-      ],
-      benefits: [
-        "Competitive compensation package",
-        "Vehicle allowance for field work",
-        "Tool and equipment provided",
-        "Overtime compensation"
-      ]
-    },
-    {
-      id: 3,
-      title: "Project Manager",
-      department: "Project Management",
-      location: "Manila, Philippines",
-      type: "Full-time",
-      experience: "5+ years",
-      description: "Oversee multiple system integration projects from inception to completion. Coordinate with clients, vendors, and internal teams to ensure projects are delivered on time and within budget.",
-      requirements: [
-        "Bachelor's degree in Engineering or Project Management",
-        "5+ years of project management experience",
-        "PMP certification preferred",
-        "Experience in IT/telecommunications projects",
-        "Strong leadership and communication skills",
-        "Proficiency in project management software"
-      ],
-      benefits: [
-        "Executive compensation package",
-        "Company car or car allowance",
-        "Flexible working arrangements",
-        "Leadership development programs"
-      ]
-    },
-    {
-      id: 4,
-      title: "Junior Network Technician",
-      department: "Technical Support",
-      location: "Manila, Philippines",
-      type: "Full-time",
-      experience: "Entry Level",
-      description: "Support senior engineers in network installations, maintenance, and troubleshooting. Great opportunity for fresh graduates to start their career in network technology.",
-      requirements: [
-        "Bachelor's degree in IT, Engineering, or related field",
-        "Fresh graduate or up to 1 year experience",
-        "Basic knowledge of networking fundamentals",
-        "Eagerness to learn and grow",
-        "Good analytical and problem-solving skills",
-        "Willingness to travel for site installations"
-      ],
-      benefits: [
-        "Competitive entry-level salary",
-        "Comprehensive training program",
-        "Mentorship from senior engineers",
-        "Career advancement opportunities"
-      ]
-    },
-    {
-      id: 5,
-      title: "Sales Engineer",
-      department: "Sales",
-      location: "Manila, Philippines",
-      type: "Full-time",
-      experience: "3+ years",
-      description: "Drive business growth by identifying new opportunities and presenting technical solutions to prospective clients. Combine technical expertise with sales acumen to expand our market presence.",
-      requirements: [
-        "Bachelor's degree in Engineering or Business",
-        "3+ years of technical sales experience",
-        "Experience in IT/telecommunications industry",
-        "Strong presentation and negotiation skills",
-        "Existing client network preferred",
-        "Results-driven with proven sales track record"
-      ],
-      benefits: [
-        "Base salary plus attractive commission structure",
-        "Sales incentives and bonuses",
-        "Company vehicle or allowance",
-        "Expense account for client meetings"
-      ]
-    },
-    {
-      id: 6,
-      title: "Quality Assurance Specialist",
-      department: "Quality Control",
-      location: "Manila, Philippines",
-      type: "Full-time",
-      experience: "2-3 years",
-      description: "Ensure all installations and systems meet the highest quality standards. Conduct inspections, testing, and documentation to maintain our reputation for excellence.",
-      requirements: [
-        "Technical diploma or Bachelor's degree",
-        "2+ years experience in quality control",
-        "Knowledge of testing equipment and procedures",
-        "Attention to detail and documentation skills",
-        "Understanding of industry standards and regulations",
-        "Experience with quality management systems"
-      ],
-      benefits: [
-        "Competitive salary package",
-        "Professional certification support",
-        "Health and wellness benefits",
-        "Performance-based incentives"
-      ]
-    }
   ];
 
   useEffect(() => {
@@ -289,6 +172,7 @@ const Careers: React.FC = () => {
     } finally {
       setIsSubmitting(false);
     }
+    
   };
 
   return (
@@ -304,7 +188,7 @@ const Careers: React.FC = () => {
             <a href="#services" onClick={(e) => handleNavClick(e, 'services')}>Services</a>
             <a href="#projects" onClick={(e) => handleNavClick(e, 'projects')}>Projects</a>
             <Link to="/careers">Careers</Link>
-            <button className={styles.contactBtn}>Contact Us</button>
+            <button className={styles.contactBtn} onClick={(e) => handleNavClick(e, 'contact')}>Contact Us</button>
           </nav>
         </div>
       </header>
@@ -321,7 +205,9 @@ const Careers: React.FC = () => {
             <p className={styles.heroSubtitle}>
               Join our team of passionate professionals shaping the future of network technology and system integration.
             </p>
-            <button className={styles.heroBtn}>View Open Positions</button>
+            <button className={styles.heroBtn} onClick={scrollToPositions}>
+              View Open Positions
+            </button>
           </div>
         </section>
 
@@ -472,7 +358,7 @@ const Careers: React.FC = () => {
                     <span className={styles.cultureStatLabel}>Workplace Rating</span>
                   </div>
                   <div className={styles.cultureStat}>
-                    <span className={styles.cultureStatNumber}>85%</span>
+                    <span className={styles.cultureStatNumber}>90%</span>
                     <span className={styles.cultureStatLabel}>Employee Retention</span>
                   </div>
                 </div>
@@ -491,7 +377,7 @@ const Careers: React.FC = () => {
             <p className={styles.ctaText}>
               Take the next step in your career and join our innovative team today.
             </p>
-            <button className={styles.ctaBtn}>Apply Now</button>
+            <button className={styles.ctaBtn} onClick={scrollToPositions}>Apply Now</button>
           </div>
         </section>
 

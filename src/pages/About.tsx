@@ -75,7 +75,7 @@ const About: React.FC = () => {
         <section ref={statsRef} className={styles.statsSection}>
           <div className={styles.statsContainer}>
             <div className={styles.statCard}>
-              <div className={styles.statNumber}>18</div>
+              <div className={styles.statNumber}>15</div>
               <div className={styles.statLabel}>Years Experience</div>
             </div>
             <div className={styles.statCard}>

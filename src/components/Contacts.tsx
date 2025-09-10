@@ -1,4 +1,3 @@
-// ContactSection.tsx
 import { useState } from 'react';
 import type { FormEvent, ChangeEvent } from 'react';
 import emailjs from 'emailjs-com';
@@ -16,6 +15,7 @@ const ContactSection = () => {
   const [isSending, setIsSending] = useState(false);
   const [feedback, setFeedback] = useState('');
 
+  // Handle change of form fields
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData(prev => ({
       ...prev,
@@ -23,33 +23,49 @@ const ContactSection = () => {
     }));
   };
 
+  // Handle form submission
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSending(true);
     setFeedback('');
 
+    // Send email to the admin
     emailjs.send(
-      'YOUR_SERVICE_ID',
-      'YOUR_TEMPLATE_ID',
-      formData,
-      'YOUR_PUBLIC_KEY'
+      'service_6bl34lb',           // Your EmailJS service ID
+      'template_w5hkxir',           // Your email template for the user
+      {
+        ...formData,               // Send all form data to the template
+        to_email: 'belmontekricel5@gmail.com',  // Admin email
+      },
+      '7TPntqYgyfkhdqPI3'          // Your EmailJS user ID (public key)
     )
-      .then(() => {
-        setFeedback('Message sent successfully!');
-        setFormData({
-          fullName: '',
-          email: '',
-          phoneNumber: '',
-          subject: '',
-          message: '',
-        });
-      })
-      .catch(() => {
-        setFeedback('Failed to send message. Please try again.');
-      })
-      .finally(() => {
-        setIsSending(false);
+    .then(() => {
+      // Send email to the user
+      return emailjs.send(
+        'service_6bl34lb',           // Your EmailJS service ID
+        'template_be786rh', // Your email template for the user
+        {
+          ...formData,               // Send all form data to the template
+        },
+        '7TPntqYgyfkhdqPI3'          // Your EmailJS user ID (public key)
+      );
+    })
+    .then(() => {
+      setFeedback('Message sent successfully!');
+      setFormData({
+        fullName: '',
+        email: '',
+        phoneNumber: '',
+        subject: '',
+        message: '',
       });
+    })
+    .catch(() => {
+      setFeedback('Failed to send message. Please try again.');
+    })
+    .finally(() => {
+      setIsSending(false);
+    });
   };
 
   return (
@@ -192,8 +208,7 @@ const ContactSection = () => {
                 value={formData.message}
                 onChange={handleChange}
                 required
-                className={`${styles.input} ${styles.textarea}`}
-              />
+                className={`${styles.input} ${styles.textarea}`}/>
               <div className={styles.inputHighlight}></div>
             </div>
 

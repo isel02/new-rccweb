@@ -75,7 +75,7 @@ const About: React.FC = () => {
           className={`${styles.statCard} ${styles.fadeInUp}`} 
           ref={setStatCardRef(0)}
         >
-          <h2>18</h2>
+          <h2>15</h2>
           <p>Years Experience</p>
         </div>
         <div 
