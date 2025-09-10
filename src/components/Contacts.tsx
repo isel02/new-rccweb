@@ -1,5 +1,5 @@
 // ContactSection.tsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 import type { FormEvent, ChangeEvent } from 'react';
 import emailjs from 'emailjs-com';
 import styles from './Contacts.module.css';

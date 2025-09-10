@@ -550,3 +550,12 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Hide scrollbar for .container while allowing scroll */
+.container {
+  scrollbar-width: none; /* Firefox */
+}
+
+.container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}

@@ -129,7 +129,7 @@ const About: React.FC = () => {
               <div className={styles.cardIcon}>🎯</div>
               <h3 className={styles.cardTitle}>Our Vision</h3>
               <p className={styles.cardText}>
-                To become one of the leading System Integrators in the Philippines, recognized for innovation and excellence in integrated network solutions.
+                To become one of the leading System Integrators in the Philippines.
               </p>
             </div>
 
@@ -137,7 +137,7 @@ const About: React.FC = () => {
               <div className={styles.cardIcon}>🚀</div>
               <h3 className={styles.cardTitle}>Our Mission</h3>
               <p className={styles.cardText}>
-                To be one of the pioneers in System Integration industry in the Philippines, providing cutting-edge products and services in Structured Cabling, CCTV, Telecommunications, FDAS and Audio Systems.
+                To be one of the pioneers in System Integration industry in the Philippines, RCC CABLING and Network Solutions Corporation aim to provide products and services of the latest technology in Structured Cabling, Cable Television, Fiber optic, CCTV, Telecommunications, FDAS and Sound and Audio System. 
               </p>
             </div>
 
@@ -145,7 +145,7 @@ const About: React.FC = () => {
               <div className={styles.cardIcon}>⭐</div>
               <h3 className={styles.cardTitle}>Our Goal</h3>
               <p className={styles.cardText}>
-                To provide customers with durable, reliable and modern equipment as well as future-proof infrastructure. We use premium materials and tools to offer quick, reliable solutions while building lasting relationships.
+                To provide our customers with durable, reliable and modern equipment as well as future-proof Auxiliary System infrastructure. We are also committed to use premium materials, tools and equipment to offer quick, reliable solution. Aside from this, we aim to be best in lasting relationships with our customers.
               </p>
             </div>
           </div>

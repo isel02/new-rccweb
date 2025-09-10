@@ -11,7 +11,7 @@ interface Service {
 const originalData: Service[] = [
   {
     title: 'Fire Detection and Alarm System',
-    img: '/assets/services/FDAS.webp',
+    img: '/assets/services/fdas.jpg',
     summary: 'Complete fire alarm system design, installation and testing.',
     items: [
       'Site Survey and Design',
@@ -36,7 +36,7 @@ const originalData: Service[] = [
   },
   {
     title: 'Cable Television (CATV)',
-    img: '/assets/services/catv.webp',
+    img: '/assets/services/catv.jpg',
     summary: 'Design and install full CATV systems with fiber and coaxial cables.',
     items: [
       'Alignment and Installation of Satellite System',
@@ -73,7 +73,7 @@ const originalData: Service[] = [
   },
   {
     title: 'CCTV',
-    img: '/assets/services/cctv_pic.jpg',
+    img: '/assets/services/cctv.jpg',
     summary: 'Design, installation and commissioning of CCTV systems and DVR/NVR.',
     items: [
       'Site Survey and Design',
@@ -107,7 +107,7 @@ const originalData: Service[] = [
   },
   {
     title: 'Magnetic Door Lock Access and Biometric System',
-    img: '/assets/services/door_lock.webp',
+    img: '/assets/services/door_access.jpg',
     summary: 'Secure access with magnetic locks and biometric configurations.',
     items: [
       'Site Survey and Design',
@@ -118,7 +118,7 @@ const originalData: Service[] = [
   },
   {
     title: 'Video Wall and Projector',
-    img: '/assets/services/video_wall.png',
+    img: '/assets/services/video_wall.jpg',
     summary: 'Supply and installation of video walls and motorized projector screens.',
     items: [
       'Site Survey and Design',
@@ -127,7 +127,7 @@ const originalData: Service[] = [
   },
   {
     title: 'Wireless Access Point (WAP) Installation',
-    img: '/assets/services/WAP.jpg',
+    img: '/assets/services/wap.jpg',
     summary: 'Design and install wireless access points with testing and configuration.',
     items: [
       'Site Survey and Design',
@@ -136,21 +136,8 @@ const originalData: Service[] = [
     ],
   },
   {
-    title: 'Plumbing Works',
-    img: '/assets/services/plumbing_works.jpg',
-    summary: 'Complete plumbing solutions including pipe laying and sanitary fixtures.',
-    items: [
-      'Site Survey and Design or implementation based on Client\'s Reference Floor Plan',
-      'Pipe Laying for Water Line',
-      'Supply and Installation of Bladder Tank',
-      'Supply and Installation of Sanitary wares',
-      'Supply and Installation of Outdoor Cleanout',
-      'Testing and Commissioning',
-    ],
-  },
-  {
     title: 'Electrical Works',
-    img: '/assets/services/electrical_works.jpg',
+    img: '/assets/services/electrical.jpg',
     summary: 'Electrical panel installation, wiring, fixtures and testing.',
     items: [
       'Site Survey and Design or implementation based on Client\'s Reference Floor Plan',

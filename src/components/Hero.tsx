@@ -24,7 +24,7 @@ const Hero: React.FC = () => {
       <Header />
       <div className={styles.heroSec}>
         <div className={styles.text}>
-          <h1 id={styles.maintext}>Integrated <br/> Innovation.</h1>
+          <h1 id={styles.maintext}>Integrated <br/> Innovation</h1>
           <p id={styles.para}>Your Trusted Partner in Integrated Network and Security Solutions.</p>
           <button id={styles.btnTalk} onClick={() => {
           const el = document.getElementById('contacts');

@@ -69,44 +69,26 @@ const Slider: React.FC = () => {
         <div className={`${styles.slide} ${styles["s--active"]}`}>
           <div className={styles.slide__inner}>
             <div className={styles.slide__content}>
-              <h2 className={styles.slide__heading}>Clip-Path Revealing Slider</h2>
-              <p className={styles.slide__text}>Greetings, Traveler!</p>
+              <h2 className={styles.slide__heading}>RCC PROJECTS</h2>
+              <p className={styles.slide__text}>Projects. Precision. Performance.</p>
             </div>
           </div>
         </div>
         <div className={styles.slide}>
           <div className={styles.slide__inner}>
+            <img src="/public/assets/projects/Wind_Farm.jpg" alt="RCC Project" className={styles.slide__image} />
             <div className={styles.slide__content}>
-              <h2 className={styles.slide__heading}>Simple Animation</h2>
-              <p className={styles.slide__text}>Clip-path magic!</p>
+              <h2 className={styles.slide__heading}>Wind Farm</h2>
+              <p className={styles.slide__text}>Projects. Precision. Performance.</p>
             </div>
           </div>
         </div>
         <div className={styles.slide}>
           <div className={styles.slide__inner}>
+            <img src="/public/assets/projects/Tanawon_Palayan.jpg" alt="RCC Project" className={styles.slide__image} />
             <div className={styles.slide__content}>
-              <h2 className={styles.slide__heading}>Very Stylish Effect!</h2>
-              <p className={styles.slide__text}>It looks cool, isn't it?</p>
-            </div>
-          </div>
-        </div>
-        <div className={styles.slide}>
-          <div className={styles.slide__inner}>
-            <div className={styles.slide__content}>
-              <h2 className={styles.slide__heading}>Limited browser support</h2>
-              <p className={styles.slide__text}>Forget about IE/Edge and FF</p>
-            </div>
-          </div>
-        </div>
-        <div className={`${styles.slide} ${styles["s--prev"]}`}>
-          <div className={styles.slide__inner}>
-            <div className={styles.slide__content}>
-              <h2 className={styles.slide__heading}>Check my other stuff!</h2>
-              <p className={styles.slide__text}>
-                <a href="https://codepen.io/suez/pens/public/" target="_blank" rel="noreferrer">Other demos</a>{" "}
-                and{" "}
-                <a href="https://twitter.com/NikolayTalanov" target="_blank" rel="noreferrer">Twitter</a>
-              </p>
+              <h2 className={styles.slide__heading}>Tanawon</h2>
+              <p className={styles.slide__text}>Projects. Precision. Performance.</p>
             </div>
           </div>
         </div>

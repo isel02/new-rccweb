@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "emailjs-com": "^3.2.0",
+    "express": "^5.1.0",
+    "mysql2": "^3.14.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^7.8.2"
