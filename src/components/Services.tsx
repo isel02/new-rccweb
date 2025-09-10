@@ -24,17 +24,6 @@ const originalData: Service[] = [
     ],
   },
   {
-    title: 'Fire Protection System',
-    img: '/assets/services/FPS.jpg',
-    summary: 'Install fire pumps, valves, and commission protection systems.',
-    items: [
-      'Site Survey and Design or implementation based on Client\'s Reference Floor Plan',
-      'Supply and installation of Fire Pump, Water pump and jockey pump',
-      'Supply and Installation of gate valve and Check valve',
-      'Testing and Commissioning',
-    ],
-  },
-  {
     title: 'Cable Television (CATV)',
     img: '/assets/services/catv.jpg',
     summary: 'Design and install full CATV systems with fiber and coaxial cables.',

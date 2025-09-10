@@ -86,8 +86,7 @@ const Header: React.FC = () => {
   return (
     <>
       <header className={styles.header}>
-        <img src="/assets/RCC-Logo.png" alt="RCC Logo" className={styles.logo} />
-        
+        <img src="/assets/RCC-Logo2.png" alt="RCC Logo" className={styles.logo} />
         {/* Desktop Navigation */}
         <nav className={styles.nav}>
           <Link to="/">Home</Link>

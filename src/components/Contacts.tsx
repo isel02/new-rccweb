@@ -111,15 +111,26 @@ const ContactSection = () => {
               <div className={styles.infoText}>
                 <strong>Phone:</strong>
                 <div className={styles.phoneNumbers}>
-                  <a href="tel:+639228738784">(+63) 922-8738784</a>
-                  <a href="tel:+639228738785">(+63) 922-8738785</a>
-                  <a href="tel:+639258738786">(+63) 925-8738786</a>
-                  <a href="tel:+6329612839">(632) 961 2839</a>
-                  <a href="tel:+6329613204">(632) 961 3204</a>
+                  <a href="tel:+639258738786">(+63) 925 873 8786</a>
                 </div>
               </div>
             </div>
-
+            <div className={styles.infoItem}>
+              <div className={styles.infoIcon}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12,6 12,12 16,14"/>
+                </svg>
+              </div>
+              <div className={styles.infoText}>
+                <strong>Facebook:</strong>
+                <p><a
+                    href="https://www.facebook.com/RCCCABLING"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >RCC Cabling and Network Solutions Corp. </a></p>
+              </div>
+            </div>
             <div className={styles.infoItem}>
               <div className={styles.infoIcon}>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -129,7 +140,7 @@ const ContactSection = () => {
               </div>
               <div className={styles.infoText}>
                 <strong>Office Hours:</strong>
-                <p>Monday to Friday<br />8:00AM - 6:00PM</p>
+                <p>Monday to Friday | 8:00AM - 6:00PM</p>
               </div>
             </div>
           </div>

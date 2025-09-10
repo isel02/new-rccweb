@@ -43,7 +43,7 @@ const About: React.FC = () => {
       <header className={styles.header}>
         <div className={styles.headerContainer}>
           <div className={styles.logoContainer}>
-            <img src="/assets/RCC-Logo.png" alt="RCC Logo" className={styles.logo} />
+            <img src="/assets/RCC-Logo2.png" alt="RCC Logo" className={styles.logo} />
           </div>
           <nav className={styles.nav}>
             <Link to="/">Home</Link>
