@@ -156,8 +156,18 @@
   background-image: url('/public/assets/projects/Main.jpg');
 }
 .slide-2 .slide__inner {
+  background-image: url('/public/assets/projects/Kirahon.jpg');
+}
+.slide-3 .slide__inner {
+  background-image: url('/public/assets/projects/Masinloc.png');
+}
+.slide-4 .slide__inner {
+  background-image: url('/public/assets/projects/Solar.jpg');
+}
+.slide-5 .slide__inner {
   background-image: url('/public/assets/projects/Wind_Farm.jpg');
 }
+
 .slide__content {
   position: absolute;
   left: 5%;

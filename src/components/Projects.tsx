@@ -74,22 +74,50 @@ const Slider: React.FC = () => {
             </div>
           </div>
         </div>
-        {/* <div className={styles.slide}>
+        <div className={styles.slide}>
           <div className={styles.slide__inner}>
             <div className={styles.slide__content}>
-              <h2 className={styles.slide__heading}>Wind Farm</h2>
+              <h2 className={styles.slide__heading}>Kirahon Solar Farm </h2>
               <p className={styles.slide__text}>Projects. Precision. Performance.</p>
+              <p className={styles.attribution}>
+                Image courtesy of <a href="https://www.alternergy.com/kirahon-solar-farm" target="_blank" rel="noopener noreferrer">Alternergy</a>.
+              </p>
             </div>
           </div>
-        </div> */}
-        {/* <div className={styles.slide}>
+        </div>
+        <div className={styles.slide}>
           <div className={styles.slide__inner}>
             <div className={styles.slide__content}>
-              <h2 className={styles.slide__heading}>Tanawon</h2>
+              <h2 className={styles.slide__heading}>Masinloc Coal Power Plant</h2>
               <p className={styles.slide__text}>Projects. Precision. Performance.</p>
+              <p className={styles.attribution}>
+                Image courtesy of <a href="https://www.smcglobalpower.com.ph/our-business-power-generation?slug=masinloc-power-plant&p=4" target="_blank" rel="noopener noreferrer">SM Global Power</a>.
+              </p>
             </div>
           </div>
-        </div> */}
+        </div>
+        <div className={styles.slide}>
+          <div className={styles.slide__inner}>
+            <div className={styles.slide__content}>
+              <h2 className={styles.slide__heading}>Ilocos Burgos Solar Farm</h2>
+              <p className={styles.slide__text}>Projects. Precision. Performance.</p>
+              <p className={styles.attribution}>
+                Image courtesy of <a href="https://www.onenews.ph/articles/energizing-ph-for-a-regenerative-future" target="_blank" rel="noopener noreferrer">OneNews</a>.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className={styles.slide}>
+          <div className={styles.slide__inner}>
+            <div className={styles.slide__content}>
+              <h2 className={styles.slide__heading}>Ilocos Burgos Wind Turbine Farm</h2>
+              <p className={styles.slide__text}>Projects. Precision. Performance.</p>
+              <p className={styles.attribution}>
+                Image courtesy of <a href="https://unsplash.com/photos/a-row-of-wind-turbines-next-to-the-ocean-I-bKUBEyOX8" target="_blank" rel="noopener noreferrer">Shekinah Togonon</a>.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className={styles.slider__control}>
