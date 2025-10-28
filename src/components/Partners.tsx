@@ -1,38 +1,38 @@
-// Partners.jsx
+import React, { useEffect, useState } from 'react';
 import styles from './Partners.module.css';
 
-const partners = [
-  { name: 'Apple', img: '/assets/partners/Apple.png' },
-  { name: 'Blackberry', img: '/assets/partners/Blackberry.png' },
-  { name: 'Bloomberg', img: '/assets/partners/Bloomberg.png' },
-  { name: 'Capital', img: '/assets/partners/Capital.png' },
-  { name: 'Cisco', img: '/assets/partners/Cisco.png' },
-  { name: 'Citrix', img: '/assets/partners/Citrix.png' },
-  { name: 'Dahua', img: '/assets/partners/Dahua.png' },
-  { name: 'Dell', img: '/assets/partners/Dell.png' },
-  { name: 'EMC', img: '/assets/partners/EMC.png' },
-  { name: 'Exchange', img: '/assets/partners/Exchange.png' },
-  { name: 'GlobalRelay', img: '/assets/partners/GlobalRelay.png' },
-  { name: 'HikVision', img: '/assets/partners/Hikvision.png' },
-  { name: 'HP', img: '/assets/partners/HP.png' },
-  { name: 'IRM', img: '/assets/partners/IRM.png' },
-  { name: 'Juniper', img: '/assets/partners/Juniper.png' },
-  { name: 'Lenovo', img: '/assets/partners/Lenovo.png' },
-  { name: 'Microsoft', img: '/assets/partners/Microsoft.png' },
-  { name: 'MicroSoft-Office', img: '/assets/partners/MicroSoft-Office.png' },
-  { name: 'Reuters', img: '/assets/partners/Reuters.png' },
-  { name: 'Riverbed', img: '/assets/partners/Riverbed.png' },
-  { name: 'RSA', img: '/assets/partners/RSA.png' },
-  { name: 'Ruijie', img: '/assets/partners/Ruijie.png' },
-  { name: 'Samsung', img: '/assets/partners/Samsung.png' },
-  { name: 'Shoretel', img: '/assets/partners/Shoretel.png' },
-  { name: 'Symantec', img: '/assets/partners/Symantec.png' },
-  { name: 'Ubiquity', img: '/assets/partners/Ubiquity.png' },
-  { name: 'Veeam', img: '/assets/partners/Veeam.png' },
-  { name: 'vmware', img: '/assets/partners/vmware.png' },
-];
+const API_BASE = "https://www.rcccabling.com.ph/api";
 
-const PartnerSection = () => {
+interface Partner {
+  id: number;
+  name: string;
+  image: string;
+}
+
+const PartnerSection: React.FC = () => {
+  const [partners, setPartners] = useState<Partner[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPartners = async () => {
+      try {
+        const res = await fetch(`${API_BASE}/partners.php`);
+        const data = await res.json();
+        // Sort partners alphabetically by name
+        const sortedPartners = (data || []).sort((a: Partner, b: Partner) => 
+          a.name.localeCompare(b.name)
+        );
+        setPartners(sortedPartners);
+      } catch (error) {
+        console.error('Error fetching partners:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPartners();
+  }, []);
+
   return (
     <section className={styles.partnersSection}>
       {/* Animated background circuit pattern */}
@@ -55,21 +55,35 @@ const PartnerSection = () => {
         </div>
 
         <div className={styles.logosContainer}>
-          <div className={styles.logosGrid}>
-            {partners.map(({ name, img }, index) => (
-              <div 
-                key={name} 
-                className={styles.logoWrapper}
-                style={{ animationDelay: `${index * 0.1}s` }}
-                title={name}
-              >
-                <div className={styles.logoInner}>
-                  <img src={img} alt={`${name} logo`} className={styles.logoImg} />
-                  <div className={styles.logoGlow}></div>
+          {loading ? (
+            <div className={styles.loadingState}>
+              <p>Loading partners...</p>
+            </div>
+          ) : partners.length > 0 ? (
+            <div className={styles.logosGrid}>
+              {partners.map((partner, index) => (
+                <div 
+                  key={partner.id} 
+                  className={styles.logoWrapper}
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                  title={partner.name}
+                >
+                  <div className={styles.logoInner}>
+                    <img 
+                      src={partner.image} 
+                      alt={`${partner.name} logo`} 
+                      className={styles.logoImg} 
+                    />
+                    <div className={styles.logoGlow}></div>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <div className={styles.emptyState}>
+              <p>No partners available</p>
+            </div>
+          )}
         </div>
       </div>
     </section>

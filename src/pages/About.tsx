@@ -1,12 +1,29 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './About.module.css';
+
+const API_BASE = "https://www.rcccabling.com.ph/api";
+
+interface CompanyInfo {
+  year_exp: string;
+  completed_proj: string;
+  ave_rate: string;
+  served: string;
+  vision: string;
+  mission: string;
+  goal: string;
+  company_img: string;
+}
+
 
 const About: React.FC = () => {
   const heroRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
+
+  const [companyInfo, setCompanyInfo] = useState<CompanyInfo | null>(null);
+  const [loading, setLoading] = useState(true);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
@@ -15,6 +32,24 @@ const About: React.FC = () => {
       el.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  useEffect(() => {
+    const fetchCompanyInfo = async () => {
+      try {
+        const res = await fetch(`${API_BASE}/company_info.php`);
+        const data = await res.json();
+        if (data && data.length > 0) {
+          setCompanyInfo(data[0]);
+        }
+      } catch (error) {
+        console.error('Error fetching company info:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCompanyInfo();
+  }, []);
 
   useEffect(() => {
     const observerOptions = {
@@ -74,22 +109,30 @@ const About: React.FC = () => {
         {/* Company Stats */}
         <section ref={statsRef} className={styles.statsSection}>
           <div className={styles.statsContainer}>
-            <div className={styles.statCard}>
-              <div className={styles.statNumber}>15</div>
-              <div className={styles.statLabel}>Years Experience</div>
-            </div>
-            <div className={styles.statCard}>
-              <div className={styles.statNumber}>240+</div>
-              <div className={styles.statLabel}>Completed Projects</div>
-            </div>
-            <div className={styles.statCard}>
-              <div className={styles.statNumber}>9.5/10</div>
-              <div className={styles.statLabel}>Average Rating</div>
-            </div>
-            <div className={styles.statCard}>
-              <div className={styles.statNumber}>150+</div>
-              <div className={styles.statLabel}>Clients Served</div>
-            </div>
+            {loading ? (
+              <div className={styles.loadingStats}>Loading stats...</div>
+            ) : companyInfo ? (
+              <>
+                <div className={styles.statCard}>
+                  <div className={styles.statNumber}>{companyInfo.year_exp}</div>
+                  <div className={styles.statLabel}>Years Experience</div>
+                </div>
+                <div className={styles.statCard}>
+                  <div className={styles.statNumber}>{companyInfo.completed_proj}+</div>
+                  <div className={styles.statLabel}>Completed Projects</div>
+                </div>
+                <div className={styles.statCard}>
+                  <div className={styles.statNumber}>{companyInfo.ave_rate}/10</div>
+                  <div className={styles.statLabel}>Average Rating</div>
+                </div>
+                <div className={styles.statCard}>
+                  <div className={styles.statNumber}>{companyInfo.served}+</div>
+                  <div className={styles.statLabel}>Clients Served</div>
+                </div>
+              </>
+            ) : (
+              <div className={styles.errorStats}>Unable to load stats</div>
+            )}
           </div>
         </section>
 
@@ -112,12 +155,22 @@ const About: React.FC = () => {
               </p>
             </div>
 
-            <div className={styles.imageContent}>
-              <img
-                src="/assets/company.jpg"
-                alt="Network Infrastructure"
-                className={styles.contentImage}
-              />
+             <div className={styles.imageContent}>
+              {loading ? (
+                <div className={styles.imagePlaceholder}>Loading image...</div>
+              ) : companyInfo?.company_img ? (
+                <img
+                  src={companyInfo.company_img}
+                  alt="Network Infrastructure"
+                  className={styles.contentImage}
+                />
+              ) : (
+                <img
+                  src="/assets/company.jpg"
+                  alt="Network Infrastructure"
+                  className={styles.contentImage}
+                />
+              )}
             </div>
           </div>
         </section>
@@ -125,29 +178,37 @@ const About: React.FC = () => {
         {/* Mission, Vision, Goals Cards */}
         <section ref={cardsRef} className={styles.cardsSection}>
           <div className={styles.cardContainer}>
-            <div className={styles.card}>
-              <div className={styles.cardIcon}>🎯</div>
-              <h3 className={styles.cardTitle}>Our Vision</h3>
-              <p className={styles.cardText}>
-                To become one of the leading System Integrators in the Philippines.
-              </p>
-            </div>
+            {loading ? (
+              <div className={styles.loadingCards}>Loading information...</div>
+            ) : companyInfo ? (
+              <>
+                <div className={styles.card}>
+                  <div className={styles.cardIcon}>🎯</div>
+                  <h3 className={styles.cardTitle}>Our Vision</h3>
+                  <p className={styles.cardText}>
+                    {companyInfo.vision}
+                  </p>
+                </div>
 
-            <div className={styles.card}>
-              <div className={styles.cardIcon}>🚀</div>
-              <h3 className={styles.cardTitle}>Our Mission</h3>
-              <p className={styles.cardText}>
-                To be one of the pioneers in System Integration industry in the Philippines, RCC CABLING and Network Solutions Corporation aim to provide products and services of the latest technology in Structured Cabling, Cable Television, Fiber optic, CCTV, Telecommunications, FDAS and Sound and Audio System. 
-              </p>
-            </div>
+                <div className={styles.card}>
+                  <div className={styles.cardIcon}>🚀</div>
+                  <h3 className={styles.cardTitle}>Our Mission</h3>
+                  <p className={styles.cardText}>
+                    {companyInfo.mission}
+                  </p>
+                </div>
 
-            <div className={styles.card}>
-              <div className={styles.cardIcon}>⭐</div>
-              <h3 className={styles.cardTitle}>Our Goal</h3>
-              <p className={styles.cardText}>
-                To provide our customers with durable, reliable and modern equipment as well as future-proof Auxiliary System infrastructure. We are also committed to use premium materials, tools and equipment to offer quick, reliable solution. Aside from this, we aim to be best in lasting relationships with our customers.
-              </p>
-            </div>
+                <div className={styles.card}>
+                  <div className={styles.cardIcon}>⭐</div>
+                  <h3 className={styles.cardTitle}>Our Goal</h3>
+                  <p className={styles.cardText}>
+                    {companyInfo.goal}
+                  </p>
+                </div>
+              </>
+            ) : (
+              <div className={styles.errorCards}>Unable to load company information</div>
+            )}
           </div>
         </section>
 

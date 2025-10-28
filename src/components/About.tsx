@@ -1,6 +1,18 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './About.module.css';
 import { useNavigate } from 'react-router-dom';
+
+const API_BASE = "https://www.rcccabling.com.ph/api";
+
+interface CompanyInfo {
+  year_exp: string;
+  completed_proj: string;
+  ave_rate: string;
+  served: string;
+  vision: string;
+  mission: string;
+  goal: string;
+}
 
 const About: React.FC = () => {
   const navigate = useNavigate();
@@ -8,6 +20,27 @@ const About: React.FC = () => {
   const textRef = useRef<HTMLDivElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
   const statCardsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  const [companyInfo, setCompanyInfo] = useState<CompanyInfo | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCompanyInfo = async () => {
+      try {
+        const res = await fetch(`${API_BASE}/company_info.php`);
+        const data = await res.json();
+        if (data && data.length > 0) {
+          setCompanyInfo(data[0]);
+        }
+      } catch (error) {
+        console.error('Error fetching company info:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCompanyInfo();
+  }, []);
 
   useEffect(() => {
     const observerOptions = {
@@ -71,34 +104,57 @@ const About: React.FC = () => {
         </button>
       </div>
       <div className={`${styles.stats} ${styles.fadeInRight}`} ref={statsRef}>
-        <div 
-          className={`${styles.statCard} ${styles.fadeInUp}`} 
-          ref={setStatCardRef(0)}
-        >
-          <h2>15</h2>
-          <p>Years Experience</p>
-        </div>
-        <div 
-          className={`${styles.statCard} ${styles.fadeInUp}`} 
-          ref={setStatCardRef(1)}
-        >
-          <h2>240+</h2>
-          <p>Completed Projects</p>
-        </div>
-        <div 
-          className={`${styles.statCard} ${styles.fadeInUp}`} 
-          ref={setStatCardRef(2)}
-        >
-          <h2>9.5/10</h2>
-          <p>Average rating</p>
-        </div>
-        <div 
-          className={`${styles.statCard} ${styles.fadeInUp}`} 
-          ref={setStatCardRef(3)}
-        >
-          <h2>150+</h2>
-          <p>Served</p>
-        </div>
+        {loading ? (
+          <>
+            <div className={`${styles.statCard} ${styles.fadeInUp}`} ref={setStatCardRef(0)}>
+              <h2>...</h2>
+              <p>Loading</p>
+            </div>
+            <div className={`${styles.statCard} ${styles.fadeInUp}`} ref={setStatCardRef(1)}>
+              <h2>...</h2>
+              <p>Loading</p>
+            </div>
+            <div className={`${styles.statCard} ${styles.fadeInUp}`} ref={setStatCardRef(2)}>
+              <h2>...</h2>
+              <p>Loading</p>
+            </div>
+            <div className={`${styles.statCard} ${styles.fadeInUp}`} ref={setStatCardRef(3)}>
+              <h2>...</h2>
+              <p>Loading</p>
+            </div>
+          </>
+        ) : companyInfo && (
+          <>
+            <div 
+              className={`${styles.statCard} ${styles.fadeInUp}`} 
+              ref={setStatCardRef(0)}
+            >
+              <h2>{companyInfo.year_exp}</h2>
+              <p>Years Experience</p>
+            </div>
+            <div 
+              className={`${styles.statCard} ${styles.fadeInUp}`} 
+              ref={setStatCardRef(1)}
+            >
+              <h2>{companyInfo.completed_proj}+</h2>
+              <p>Completed Projects</p>
+            </div>
+            <div 
+              className={`${styles.statCard} ${styles.fadeInUp}`} 
+              ref={setStatCardRef(2)}
+            >
+              <h2>{companyInfo.ave_rate}/10</h2>
+              <p>Average rating</p>
+            </div>
+            <div 
+              className={`${styles.statCard} ${styles.fadeInUp}`} 
+              ref={setStatCardRef(3)}
+            >
+              <h2>{companyInfo.served}+</h2>
+              <p>Served</p>
+            </div>
+          </>
+        )}
       </div>
     </section>
   );
