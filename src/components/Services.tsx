@@ -1,142 +1,19 @@
 import React, { useRef, useEffect, useState } from 'react';
 import styles from './Services.module.css';
 
+const API_BASE = "https://www.rcccabling.com.ph/api";
+
 interface Service {
   title: string;
-  img: string;
-  summary: string;
-  items: string[];
+  image: string;
+  description: string;
 }
 
-const originalData: Service[] = [
-  {
-    title: 'Fire Detection and Alarm System',
-    img: '/assets/services/fdas.jpg',
-    summary: 'Complete fire alarm system design, installation and testing.',
-    items: [
-      'Site Survey and Design',
-      'Cable Laying For Fire Alarm System Devices',
-      'Installation and Supply of Fire Alarm System Devices',
-      'Termination and Configuration of Fire Alarm Devices',
-      'Termination, Configuration and Programming of Control Panel',
-      'Testing and commissioning of Fire Alarm System Devices',
-      'Fixture Setup',
-    ],
-  },
-  {
-    title: 'Cable Television (CATV)',
-    img: '/assets/services/catv.jpg',
-    summary: 'Design and install full CATV systems with fiber and coaxial cables.',
-    items: [
-      'Alignment and Installation of Satellite System',
-      'System Design in both Head and Distribution',
-      'Installation of Passive and Active CATV equipment',
-      'Activation and Configuration',
-      'Cable Laying both Backbone using Fiber Optic Cable and Coaxial Cable',
-    ],
-  },
-  {
-    title: 'Fiber Optic',
-    img: '/assets/services/fiber_optic.jpg',
-    summary: 'Survey, installation, splicing, and testing of fiber optic cables.',
-    items: [
-      'Site Survey and Design',
-      'Cable Laying for Fiber Optic',
-      'Fiber Optic Cable Preparation for Termination',
-      'Fiber Optic Splicing',
-      'Fiber Optic Testing and Commissioning',
-    ],
-  },
-  {
-    title: 'Structured Cabling (Data and Voice)',
-    img: '/assets/services/structured_cabling.jpg',
-    summary: 'End-to-end data and voice cabling including backbone fiber optic.',
-    items: [
-      'Site Survey and Design',
-      'Installation of UTP (CAT5E, CAT6) and Backbone using Fiber Optic Cable',
-      'Termination and activation of DATA and Voice',
-      'Configuration of Devices (Servers, Switches, Access Point, etc.)',
-      'Installation and Supply of all kinds of DATA and Telecommunication Cabinet Rack',
-      'Testing and commissioning of DATA and Voice',
-    ],
-  },
-  {
-    title: 'CCTV',
-    img: '/assets/services/cctv.jpg',
-    summary: 'Design, installation and commissioning of CCTV systems and DVR/NVR.',
-    items: [
-      'Site Survey and Design',
-      'Cable Laying for CCTV Cameras',
-      'Termination and System Installation of Camera and DVR/NVR',
-      'System Configuration of CCTV camera and DVR/NVR',
-      'Testing and Activation of CCTV camera and DVR/NVR',
-    ],
-  },
-  {
-    title: 'PABX',
-    img: '/assets/services/PABX.webp',
-    summary: 'Installation and configuration of PABX telephone systems.',
-    items: [
-      'Site Survey and Design',
-      'Cable Laying for PABX System',
-      'Termination of telephones and PABX',
-      'System Configuration of PABX',
-      'Testing and Commissioning of PABX System',
-    ],
-  },
-  {
-    title: 'PA (Public Address System)',
-    img: '/assets/services/PA.jpg',
-    summary: 'Installation and setup of PA systems for clear communication.',
-    items: [
-      'Site Survey and Design',
-      'Termination and Installation of PA system',
-      'System Configuration of PA system',
-    ],
-  },
-  {
-    title: 'Magnetic Door Lock Access and Biometric System',
-    img: '/assets/services/door_access.jpg',
-    summary: 'Secure access with magnetic locks and biometric configurations.',
-    items: [
-      'Site Survey and Design',
-      'Termination of Magnetic door locks access',
-      'System Configuration of Magnetic door lock access system',
-      'System Configuration of Biometric system',
-    ],
-  },
-  {
-    title: 'Video Wall and Projector',
-    img: '/assets/services/video_wall.jpg',
-    summary: 'Supply and installation of video walls and motorized projector screens.',
-    items: [
-      'Site Survey and Design',
-      'Supply and Installation of Video Wall and Projector with Motorized Screen',
-    ],
-  },
-  {
-    title: 'Wireless Access Point (WAP) Installation',
-    img: '/assets/services/wap.jpg',
-    summary: 'Design and install wireless access points with testing and configuration.',
-    items: [
-      'Site Survey and Design',
-      'Supply, Installation and Termination of Wireless Access Point',
-      'Configuration and Testing of Wireless Access Point',
-    ],
-  },
-  {
-    title: 'Electrical Works',
-    img: '/assets/services/electrical.jpg',
-    summary: 'Electrical panel installation, wiring, fixtures and testing.',
-    items: [
-      'Site Survey and Design or implementation based on Client\'s Reference Floor Plan',
-      'Cable Laying and Installation of Panel Board',
-      'Supply and Installation of Electrical Fixtures, Orbit Fan, etc.',
-      'Box Setting for Outlet and Switches',
-      'Testing and Commissioning',
-    ],
-  },
-];
+interface TransformedService {
+  title: string;
+  img: string;
+  items: string[];
+}
 
 const CARD_WIDTH = 280 + 16;
 
@@ -146,13 +23,45 @@ const Carousel: React.FC = () => {
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+  const [services, setServices] = useState<TransformedService[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch services from API
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(`${API_BASE}/services.php`);
+        const data = await response.json();
+        
+        if (data && data.length > 0) {
+          // Transform API data to match component structure
+          const transformedData: TransformedService[] = data.map((service: Service) => ({
+            title: service.title,
+            img: service.image,
+            items: service.description.split('|').map((item: string) => item.trim()).filter((item: string) => item.length > 0)
+          }));
+          
+          setServices(transformedData);
+        }
+      } catch (error) {
+        console.error('Error fetching services:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchServices();
+  }, []);
 
   // Repeat data for infinite loop
-  const loopedData = [...originalData, ...originalData, ...originalData];
-  const middleIndex = originalData.length;
+  const loopedData = services.length > 0 ? [...services, ...services, ...services] : [];
+  const middleIndex = services.length;
 
   // Scroll Animation Observer
   useEffect(() => {
+    if (services.length === 0 || loading) return;
+
     const observerOptions = {
       threshold: 0.2,
       rootMargin: '0px 0px -100px 0px'
@@ -181,18 +90,20 @@ const Carousel: React.FC = () => {
     }
 
     return () => observer.disconnect();
-  }, [middleIndex]);
+  }, [middleIndex, services.length, loading]);
 
   // On mount, scroll to the middle
   useEffect(() => {
+    if (services.length === 0 || loading) return;
     const container = containerRef.current;
     if (container) {
       container.scrollLeft = middleIndex * CARD_WIDTH;
     }
-  }, [middleIndex]);
+  }, [middleIndex, services.length, loading]);
 
   // Handle infinite loop illusion
   useEffect(() => {
+    if (services.length === 0 || loading) return;
     const container = containerRef.current;
     if (!container) return;
 
@@ -203,19 +114,19 @@ const Carousel: React.FC = () => {
 
       if (scrollLeft <= 0) {
         // At start → jump to middle set
-        container.scrollLeft = originalData.length * CARD_WIDTH;
+        container.scrollLeft = services.length * CARD_WIDTH;
       } else if (scrollLeft >= maxScrollLeft - CARD_WIDTH) {
         // At end → jump to middle set
-        container.scrollLeft = originalData.length * CARD_WIDTH;
+        container.scrollLeft = services.length * CARD_WIDTH;
       }
 
-      const index = Math.round(container.scrollLeft / CARD_WIDTH) % originalData.length;
+      const index = Math.round(container.scrollLeft / CARD_WIDTH) % services.length;
       setActiveIndex(index);
     };
 
     container.addEventListener('scroll', handleScroll, { passive: true });
     return () => container.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [services.length, loopedData.length, loading]);
 
   const scrollBy = (dir: 'left' | 'right') => {
     const container = containerRef.current;
@@ -226,6 +137,20 @@ const Carousel: React.FC = () => {
   const setCardRef = (index: number) => (el: HTMLDivElement | null) => {
     cardsRef.current[index] = el;
   };
+
+  if (loading) {
+    return (
+      <div className={styles.carouselWrapper} id='services'>
+        <h3>Our Services</h3>
+        <h2>What We Offer</h2>
+        <p style={{ textAlign: 'center', padding: '2rem' }}>Loading services...</p>
+      </div>
+    );
+  }
+
+  if (services.length === 0) {
+    return null;
+  }
 
   return (
     <div 
@@ -265,7 +190,7 @@ const Carousel: React.FC = () => {
       </button>
 
       <div className={styles.dots}>
-        {originalData.map((_, idx) => (
+        {services.map((_, idx) => (
           <span
             key={idx}
             className={`${styles.dot} ${idx === activeIndex ? styles.active : ''}`}
@@ -273,7 +198,7 @@ const Carousel: React.FC = () => {
               const container = containerRef.current;
               if (!container) return;
               container.scrollTo({
-                left: (originalData.length + idx) * CARD_WIDTH,
+                left: (services.length + idx) * CARD_WIDTH,
                 behavior: 'smooth',
               });
             }}
